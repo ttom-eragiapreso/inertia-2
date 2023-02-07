@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,9 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])
     ->group(function(){
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/search', [PageController::class, 'search'])->name('search');
+        Route::get('/search/results/', [PageController::class, 'searchApi'])->name('searchApi');
+        Route::get('/search/results/pagination', [PageController::class, 'pagination'])->name('pagination');
         Route::resource('dashboard', DashboardController::class);;
     });
 

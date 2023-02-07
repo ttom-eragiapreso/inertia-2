@@ -26,6 +26,12 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Your Library
                                 </NavLink>
+                                <NavLink
+                                    :href="route('search')"
+                                    :active="route().current('search')"
+                                >
+                                    Search For New Music
+                                </NavLink>
                             </div>
                         </div>
 
@@ -163,7 +169,7 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- Page Content -->
-            <main class="py-7">
+            <main class="py-9">
                 <slot />
             </main>
         </div>

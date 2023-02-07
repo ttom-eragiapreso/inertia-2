@@ -4,7 +4,7 @@
     >
         <div class="shadow-md shadow-slate-400 rounded-lg overflow-hidden">
             <img
-                :src="correctSrc(record)"
+                :src="record.cover_image || record.thumb"
                 class="shrink-0 w-48 object-cover h-full max-w-full"
                 :alt="record.title"
             />
@@ -34,12 +34,6 @@ import { computed } from "@vue/reactivity";
 defineProps({
     record: Object,
 });
-
-let correctSrc = (record) => {
-    let backslash = '""';
-
-    return record.thumb.replaceAll(backslash, "");
-};
 
 let getAuthor = (record) => {
     if (record.title.includes("-")) {
