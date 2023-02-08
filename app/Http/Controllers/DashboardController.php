@@ -55,6 +55,10 @@ class DashboardController extends Controller
         // Save the new album in DB
         $new_album->save();
 
+        $user = auth()->user();
+
+        $new_album->users()->attach($user->id);
+
 
         // If the genre already exists, I can attach it, but if it doesn't exist, I have to create it first to then attach it, otherwise I get an error where it's trying to use the value of the genre as the genre_id in the pivot.
 
@@ -144,3 +148,4 @@ class DashboardController extends Controller
         //
     }
 }
+
