@@ -64,7 +64,9 @@ class DashboardController extends Controller
         if(array_key_exists('genre',$album_info['record'])){
             foreach($album_info['record']['genre'] as $genre){
                 if(in_array($genre, $genres)){
-                    $new_album->genres()->attach($genre);
+                    // If it exists, I have to find the id of that genre and then attach it.
+                    $existingGenre = Genre::where('name', $genre)->first();
+                    $new_album->genres()->attach($existingGenre);
                 }else {
                     $new_genre = new Genre();
                     $new_genre->name = $genre;
@@ -77,7 +79,9 @@ class DashboardController extends Controller
         if(array_key_exists('style',$album_info['record'])){
             foreach($album_info['record']['style'] as $style){
                 if(in_array($style, $genres)){
-                    $new_album->genres()->attach($style);
+                    $existingGenre = Genre::where('name', $style)->first();
+
+                    $new_album->genres()->attach($existingGenre);
                 }else {
                     $new_genre = new Genre();
                     $new_genre->name = $style;
