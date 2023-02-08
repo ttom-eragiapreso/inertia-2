@@ -31,8 +31,8 @@
         </form>
     </div>
 
-    <div v-if="message">
-        <h2 class="text-3xl text-white">{{ message }}</h2>
+    <div v-if="props.message">
+        <h2 class="text-3xl text-white">{{ props.message }}</h2>
     </div>
 
     <!-- If there is pagination I show info about the number of results and how many pages -->
@@ -83,6 +83,7 @@ let props = defineProps({
     pagination: Object,
     artist: String,
     release_title: String,
+    message: String,
 });
 </script>
 

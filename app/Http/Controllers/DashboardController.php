@@ -57,7 +57,8 @@ class DashboardController extends Controller
 
 
         // If the genre already exists, I can attach it, but if it doesn't exist, I have to create it first to then attach it, otherwise I get an error where it's trying to use the value of the genre as the genre_id in the pivot.
-        $genres = (array) Genre::all();
+
+        $genres =  Genre::all()->pluck('name')->toArray();
 
         // If the API response had genres, we use that info to populate the pivot table with the genres
         if(array_key_exists('genre',$album_info['record'])){
