@@ -17,10 +17,11 @@
                 <Link
                     class="bg-mint-500 p-2 text-bisque-50 rounded-xl hover:bg-mint-700"
                     as="button"
-                    href="#"
-                    :data="{ id: record.id }"
+                    method="post"
+                    :href="route('dashboard.store')"
+                    :data="{ record: record }"
                 >
-                    More Info
+                    Add to your library
                 </Link>
             </div>
         </div>
@@ -34,22 +35,4 @@ import { computed } from "@vue/reactivity";
 defineProps({
     record: Object,
 });
-
-let getAuthor = (record) => {
-    if (record.title.includes("-")) {
-        let words = record.title.split("-");
-        return words[0].trim();
-    } else {
-        return record.title;
-    }
-};
-
-let getTitle = (record) => {
-    if (record.title.includes("-")) {
-        let words = record.title.split("-");
-        return words[1].trim();
-    } else {
-        return record.title;
-    }
-};
 </script>

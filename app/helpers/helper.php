@@ -14,3 +14,21 @@ function get_ctx(){
     return $context;
 }
 
+function getAuthor($album){
+
+    if(str_contains($album['title'],' - ')){
+      return trim(explode('-', $album['title'])[0]);
+    }else {
+      return $album['title'];
+    }
+  }
+
+  function getTitle($album){
+
+    if(str_contains($album['title'],' - ')){
+      return trim(explode('-', $album['title'])[1]);
+    }else {
+      return $album['title'];
+    }
+  }
+

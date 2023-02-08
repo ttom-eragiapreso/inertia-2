@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('albums', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('author');
-            $table->string('thumb');
-            $table->string('release_year');
-            $table->string('country')->nullable();
-            $table->timestamps();
+        Schema::create('album_genre', function (Blueprint $table) {
+
+            $table->unsignedBigInteger('album_id');
+            $table->foreign('album_id')->references('id')->on('albums')->cascadeOnDelete();
+
+            $table->unsignedBigInteger('genre_id');
+            $table->foreign('genre_id')->references('id')->on('genres');
+
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('albums');
+        Schema::dropIfExists('album_genre');
     }
 };

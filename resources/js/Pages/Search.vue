@@ -31,6 +31,10 @@
         </form>
     </div>
 
+    <div v-if="message">
+        <h2 class="text-3xl text-white">{{ message }}</h2>
+    </div>
+
     <!-- If there is pagination I show info about the number of results and how many pages -->
     <div v-if="props.pagination">
         <h2>
@@ -66,6 +70,10 @@ let form = reactive({
     artist: "",
 });
 
+let message = usePage().props.message;
+
+let id = usePage().props.id;
+
 let submit = () => {
     Inertia.post("/query", form);
 };
@@ -82,7 +90,7 @@ let props = defineProps({
 import Album from "@/Components/Album.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { reactive, ref } from "@vue/reactivity";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import Paginator from "@/Components/Paginator.vue";
 import { computed, onMounted } from "@vue/runtime-core";
 export default {
