@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('album_user', function (Blueprint $table) {
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
 
             $table->unsignedBigInteger('album_id');
-            $table->foreign('album_id')->references('id')->on('albums');
+            $table->foreign('album_id')->references('id')->on('albums')->cascadeOnDelete();
         });
     }
 
