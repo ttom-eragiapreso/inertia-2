@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('author');
             $table->string('thumb');
             $table->string('release_year');
-            $table->string('country')->nullable();
+            $table->string('country')->nullable()->default('No country available');
             $table->timestamps();
         });
     }
