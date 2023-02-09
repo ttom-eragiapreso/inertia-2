@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('discogs_id')->unique();
             $table->string('title');
             $table->string('author');
             $table->string('thumb');

@@ -43,8 +43,16 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        // Get all the info from the clicked album - create a new instance of Album
+        $user = auth()->user();
+        // Get all the info from the clicked album
         $album_info = $request->all();
+
+        // Find out if the album already exists.
+        $album_exists = Album::where('discogs_id', $album_info['record']['id'])->first();
+
+
+        if(is_null($album_exists)){
+        // If it doesn't exist, we did as previously, so we create the album and attach all the genres and styles.
         $new_album = new Album();
         // Populate the new album fields with the API data
         $new_album->title = getTitle($album_info['record']);
@@ -55,7 +63,6 @@ class DashboardController extends Controller
         // Save the new album in DB
         $new_album->save();
 
-        $user = auth()->user();
 
         $new_album->users()->attach($user->id);
 
@@ -94,13 +101,20 @@ class DashboardController extends Controller
                 }
             }
         }
+        return redirect()->back();
 
-        $flash = [
-            'message' => "The album $new_album->title by $new_album->author has been successfully added to your library.",
-            'id' => $album_info['record']['id']
-        ];
+        }elseif($album_exists->users->contains($user->id)) {
+            // If the user already has that album saved, we just return back with a message;
 
-        return redirect()->back()->with($flash);
+            $message = "You already have $album_exists->title in your collection";
+            return redirect()->route('search', $message);
+
+        }else {
+            // If the album already exists, but it's not already associated with that user we just have to attach that album to the logged user ID
+            $album_exists->users()->attach($user->id);
+            return redirect()->back();
+        }
+
     }
 
     /**

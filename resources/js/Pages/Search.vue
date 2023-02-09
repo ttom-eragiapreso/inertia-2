@@ -70,10 +70,6 @@ let form = reactive({
     artist: "",
 });
 
-let message = usePage().props.message;
-
-let id = usePage().props.id;
-
 let submit = () => {
     Inertia.post("/query", form);
 };

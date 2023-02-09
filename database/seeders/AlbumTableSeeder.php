@@ -20,6 +20,7 @@ class AlbumTableSeeder extends Seeder
         foreach($library as $record){
             $new_record = new Album();
 
+            $new_record->discogs_id = $record['id'];
             $new_record->title = $record['title'];
             $new_record->author = $record['author'];
             $new_record->thumb = stripslashes($record['cover_img']);
