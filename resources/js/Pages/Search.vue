@@ -36,24 +36,24 @@
     </div>
 
     <!-- If there is pagination I show info about the number of results and how many pages -->
-    <div v-if="props.pagination">
+    <div v-if="store.pagination">
         <h2>
-            Results found : {{ props.pagination.items }} for
+            Results found : {{ store.pagination.items }} for
             <span v-if="artist">Artist: {{ artist }}</span>
             <span v-if="release_title">Release Title: {{ release_title }}</span>
         </h2>
         <h3>
-            Page: {{ props.pagination.page }} of {{ props.pagination.pages }}
+            Page: {{ store.pagination.page }} of {{ store.pagination.pages }}
         </h3>
     </div>
 
     <!-- If there are results, I print them here -->
-    <div v-if="props.results" class="position-relative">
+    <div v-if="store.results" class="position-relative">
         <div
             class="container md:gap-x-4 mx-auto flex flex-wrap justify-around px-5 columns-2 md:columns-4 lg:columns-6"
         >
             <Album
-                v-for="record in props.results"
+                v-for="record in store.results"
                 :key="record.id"
                 :record="record"
             />
@@ -61,7 +61,7 @@
     </div>
 
     <!-- I load the paginator component, only if a pagination comes from the search -->
-    <Paginator v-if="props.pagination" :pagination="props.pagination" />
+    <Paginator v-if="store.pagination" :pagination="store.pagination" />
 </template>
 
 <script setup>
@@ -70,10 +70,6 @@ let form = reactive({
     artist: "",
 });
 
-let submit = () => {
-    Inertia.post("/query", form);
-};
-
 let props = defineProps({
     results: Object,
     pagination: Object,
@@ -81,10 +77,20 @@ let props = defineProps({
     release_title: String,
     message: String,
 });
+
+onMounted(() => {
+    if (props.results != null) {
+        store.results = props.results;
+    }
+    if (props.pagination != null) {
+        store.pagination = props.pagination;
+    }
+});
 </script>
 
 <script>
 import Album from "@/Components/Album.vue";
+import { store } from "../data/store";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { reactive, ref } from "@vue/reactivity";
 import { Link, usePage } from "@inertiajs/vue3";

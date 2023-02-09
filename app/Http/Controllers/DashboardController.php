@@ -21,7 +21,6 @@ class DashboardController extends Controller
 
         $user_library = $user->albums;
 
-
        return Inertia::render('Dashboard', compact('user_library'));
     }
 
@@ -55,6 +54,7 @@ class DashboardController extends Controller
         // If it doesn't exist, we did as previously, so we create the album and attach all the genres and styles.
         $new_album = new Album();
         // Populate the new album fields with the API data
+        $new_album->discogs_id = $album_info['record']['id'];
         $new_album->title = getTitle($album_info['record']);
         $new_album->author = getAuthor($album_info['record']);
         $new_album->thumb = $album_info['record']['cover_image'];
@@ -101,7 +101,10 @@ class DashboardController extends Controller
                 }
             }
         }
-        return redirect()->back();
+
+        $message = "You have successfully added the album $new_album->title";
+
+        return Inertia::render('Search', compact('message'));
 
         }elseif($album_exists->users->contains($user->id)) {
             // If the user already has that album saved, we just return back with a message;
