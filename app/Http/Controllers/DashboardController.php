@@ -107,7 +107,7 @@ class DashboardController extends Controller
             // If the user already has that album saved, we just return back with a message;
 
             $message = "You already have $album_exists->title in your collection";
-            return redirect()->route('search', $message);
+            return Inertia::render('Search', compact('message'));
 
         }else {
             // If the album already exists, but it's not already associated with that user we just have to attach that album to the logged user ID
