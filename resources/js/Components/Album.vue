@@ -23,6 +23,7 @@
                 >
                     Add to your library
                 </Link>
+                <button @click="launch">Show Modal</button>
             </div>
         </div>
     </div>
@@ -30,9 +31,16 @@
 
 <script setup>
 import { Link } from "@inertiajs/vue3";
-import { computed } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
+import Modal from "./Modal.vue";
 
 defineProps({
     record: Object,
 });
+
+const emit = defineEmits(["modalShow"]);
+
+function launch(record) {
+    emit("modalShow", record);
+}
 </script>

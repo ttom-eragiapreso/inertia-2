@@ -96,6 +96,7 @@ import { reactive, ref } from "@vue/reactivity";
 import { Link, usePage } from "@inertiajs/vue3";
 import Paginator from "@/Components/Paginator.vue";
 import { computed, onMounted } from "@vue/runtime-core";
+import Modal from "@/Components/Modal.vue";
 export default {
     layout: AuthenticatedLayout,
 };
