@@ -9,10 +9,12 @@
 
             <div class="card-details p-3">
                 <h5 class="text-2xl mb-3">
-                    <span class="text-mint-400">Title: </span>
+                    <span class="text-mint-400">Title: {{ record.title }}</span>
                 </h5>
                 <h5 class="text-2xl mb-2">
-                    <span class="text-mint-400">Author: </span>
+                    <span class="text-mint-400"
+                        >Author: {{ record.author }}</span
+                    >
                 </h5>
 
                 <h4 class="mt-2">Generi:</h4>

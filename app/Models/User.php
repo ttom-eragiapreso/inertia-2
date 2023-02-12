@@ -45,6 +45,6 @@ class User extends Authenticatable
     ];
 
     public function albums(){
-        return $this->belongsToMany(Album::class);
+        return $this->belongsToMany(Album::class)->with('genres');
     }
 }
