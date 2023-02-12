@@ -1,10 +1,12 @@
 <template>
+    <!-- Condition Modal -->
     <Modal v-if="showModal" :show="showModal" @close="showModal = false">
         <Details v-if="showModal" :record="record" />
     </Modal>
     <div
         class="flex flex-col justify-between min-h-72 mb-28 p-3 bg-slate-300 shadow-lg shadow-space-700/80 rounded-xl transition ease-in-out delay-50 duration-300 hover:scale-110 hover:shadow-xl hover:shadow-space-700/90"
     >
+        <!-- Img container -->
         <div class="shadow-md shadow-slate-400 rounded-lg overflow-hidden">
             <img
                 :src="record.cover_image || record.thumb"
@@ -12,7 +14,7 @@
                 :alt="record.title"
             />
         </div>
-
+        <!-- Album Info -->
         <div class="w-48 rounded-b-xl h-auto text-center">
             <h5 class="text-black-500 mb-3">{{ record.title }}</h5>
             <h6 class="text-slate-600 mb-4">{{ record.author }}</h6>
@@ -42,11 +44,6 @@ let showModal = ref(false);
 
 defineProps({
     record: Object,
+    search: Boolean,
 });
-
-const emit = defineEmits(["modalShow"]);
-
-function launch(record) {
-    emit("modalShow", record);
-}
 </script>

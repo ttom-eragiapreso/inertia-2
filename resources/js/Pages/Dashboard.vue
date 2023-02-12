@@ -26,9 +26,6 @@ function passDetails(record) {
     <Head title="Your Library" />
 
     <AuthenticatedLayout>
-        <!-- <Modal :show="showModal" @close="showModal = false">
-            <Details v-if="showModal" />
-        </Modal> -->
         <div
             class="container md:gap-x-4 mx-auto flex flex-wrap justify-around px-5 columns-2 md:columns-4 lg:columns-6"
         >
@@ -36,6 +33,7 @@ function passDetails(record) {
                 v-for="record in props.user_library"
                 :key="record.id"
                 :record="record"
+                :search="false"
                 @modal-show="showModal = !showModal"
             />
         </div>

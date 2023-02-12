@@ -56,6 +56,7 @@
                 v-for="record in store.results"
                 :key="record.id"
                 :record="record"
+                :search="true"
             />
         </div>
     </div>
@@ -84,6 +85,12 @@ onMounted(() => {
     }
     if (props.pagination != null) {
         store.pagination = props.pagination;
+    }
+    if (props.artist != null) {
+        store.artist = props.artist;
+    }
+    if (props.release_title != null) {
+        store.release_title = props.release_title;
     }
 });
 </script>
