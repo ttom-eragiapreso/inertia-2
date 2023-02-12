@@ -1,5 +1,5 @@
 <template>
-    <Modal :show="showModal" @close="showModal = false">
+    <Modal v-if="showModal" :show="showModal" @close="showModal = false">
         <Details v-if="showModal" :record="record" />
     </Modal>
     <div
